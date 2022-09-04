@@ -20,7 +20,7 @@ if uploaded_file is not None:
 
     # fetch unique users
     user_list = df['user'].unique().tolist()
-    user_list.remove('group_notification')
+    if 'group_notification' in user_list: user_list.remove('group_notification')
     user_list.sort()
     user_list.insert(0,"Overall")
 
@@ -105,6 +105,7 @@ if uploaded_file is not None:
         st.title("Wordcloud")
         df_wc = helper.create_wordcloud(selected_user,df)
         fig,ax = plt.subplots()
+        plt.axis("off")
         ax.imshow(df_wc)
         st.pyplot(fig)
 
